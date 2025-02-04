@@ -1,0 +1,90 @@
+
+.place-loan{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 50px;
+
+
+}
+
+.place-loan-left{
+    width: 100%;
+    max-width: max(30%,500px);
+
+}
+.place-loan-left .title{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+
+}
+.place-loan-left input{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c5c5c5 ;
+    border-radius: 4px;
+    outline-color: tomato;
+
+
+
+}
+.place-loan-left .multi-fields{
+    display: flex;
+    gap: 10px;
+
+}
+.place-loan-right  input{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c5c5c5 ;
+    border-radius: 4px;
+    outline-color: tomato;
+
+}
+.place-loan-right{
+    width: 100%;
+    max-width:max(40%,500px) ;
+    margin-top: 77px;
+}
+.place-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .place-btn input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .place-btn p {
+    font-size: 14px;
+    color: #555;
+    flex: 1;
+  }
+  
+  .place-btn button {
+    border: none;
+    
+    width: 200px;
+    height: 50px;
+    border-radius: 75px;
+    
+    background: #ff4141;
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .place-btn button:hover {
+    background-color: #d69e00; /* Darker shade of gold */
+  }
+  
