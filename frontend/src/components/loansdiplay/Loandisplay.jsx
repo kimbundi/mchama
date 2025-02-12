@@ -7,7 +7,7 @@ const Loandisplay = ({category}) => {
     const {services_list} = useContext(storeContext)
   return (
     <div className='loan-display' id="loan display">
-      <h2>Explore Our Loans and Savings Solutions.</h2>
+      <h2>Gundua Mikopo na Suluhisho Zetu za Akiba.</h2>
       <div className="loan-display-list">
         {services_list.map((item,index)=>{
             if (category==="All" || category===item.category) {

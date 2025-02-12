@@ -18,13 +18,14 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-content-center">
-                <h2>COMPANY</h2>
-                <ul>
-                    <li>Home</li>
-                    <li>About us</li>
-                    <li>Loan products</li>
-                    <li>Privacy policy</li>
-                </ul>
+            <h2>Kampuni</h2>
+<ul>
+    <li>Nyumbani</li>
+    <li>Kuhusu Sisi</li>
+    <li>Bidhaa za Mikopo</li>
+    <li>Sera ya Faragha</li>
+</ul>
+
             </div>
             <div className="footer-content-right">
                 <h2>Get in Touch</h2>

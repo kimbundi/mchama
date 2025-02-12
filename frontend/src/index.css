@@ -10,6 +10,12 @@
 }
 body{
   min-height: 100vh;
+  /*
+  background-color: rgba(219, 226, 226, 0.758);
+  */
+  background: linear-gradient(to right, rgba(219, 226, 226, 0.758), rgba(173, 190, 190, 0.758));
+
+
 }
 a{
   text-decoration: none;

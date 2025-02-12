@@ -4,8 +4,8 @@ import { product_list } from '../../assets/assets'
 const Loanproducts = ({category,setCategory}) => {
   return (
     <div  className='loan-products' id="loan-products">
-        <h1>EXPLORE OUR PRODUCTS</h1>
-        <p className='loan-products-text'>  Discover a wide range of loan products tailored to meet your financial needs. From personal loans to business financing, we have solutions designed to help you achieve your goals.</p>
+        <h1>chunguza bidhaa zetu</h1>
+        <p className='loan-products-text'>  Gundua aina mbalimbali za bidhaa za mikopo zilizoundwa ili kukidhi mahitaji yako ya kifedha. Kuanzia mikopo ya kibinafsi hadi ufadhili wa biashara, tunayo suluhisho zilizoundwa kukusaidia kufikia malengo yako</p>
         <div className="explore-products-list">
             {product_list.map((item,index)=>{
                 return (

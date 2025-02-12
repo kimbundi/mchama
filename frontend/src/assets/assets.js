@@ -48,84 +48,80 @@ export const assets = {
     
 }
 
-
 export const product_list = [
     {
-        product_name: "Loan Products",
+        product_name: "Bidhaa za Mikopo",
         product_image: product_1
     },
     {
-        product_name: "Group Savings/Mchama",
+        product_name: "Akiba za Kikundi/Mchama",
         product_image: product_2
     },
     {
-        product_name: "Emergency Loans",
+        product_name: "Mikopo ya Dharura",
         product_image: product_3
     },
     {
-        product_name: "Business Loans",
+        product_name: "Mikopo ya Biashara",
         product_image: product_4
     },
     {
-        product_name: "Education Loans",
+        product_name: "Mikopo ya Elimu",
         product_image: product_5
     },
     {
-        product_name: "Financial Advisory",
+        product_name: "Ushauri wa Kifedha",
         product_image: product_6
     },
 ];
 
-
 export const services_list = [
     {
         _id: "1",
-        name: "Personal Loan",
+        name: "Mikopo ya Kibinafsi",
         image: product_1,
-        price: 1000, // Example minimum loan amount
-        description: "A flexible personal loan to meet your urgent financial needs.",
-        category: "Loan Products"
+        price: 1000, // Mfano wa kiasi cha chini cha mkopo
+        description: "Mikopo ya kibinafsi yenye kubadilika kukidhi mahitaji yako ya kifedha ya haraka.",
+        category: "Bidhaa za Mikopo"
     },
     {
         _id: "2",
-        name: "Group Savings Plan",
+        name: "Mpango wa Akiba za Kikundi",
         image: product_2,
-        price: 500, // Example minimum savings deposit
-        description: "A collaborative savings solution for financial security.",
-        category: "Group Savings/Mchama"
+        price: 500, // Mfano wa amana ya chini ya akiba
+        description: "Suluhisho la akiba la ushirikiano kwa usalama wa kifedha.",
+        category: "Akiba za Kikundi/Mchama"
     },
     {
         _id: "3",
-        name: "Emergency Quick Loan",
+        name: "Mikopo ya Dharura ya Haraka",
         image: product_3,
         price: 2000,
-        description: "Fast cash disbursement for unexpected expenses.",
-        category: "Emergency Loans"
+        description: "Ugavi wa pesa za haraka kwa gharama zisizotarajiwa.",
+        category: "Mikopo ya Dharura"
     },
     {
         _id: "4",
-        name: "Small Business Loan",
+        name: "Mikopo ya Biashara Ndogo",
         image: product_4,
         price: 5000,
-        description: "Funding solutions to grow and expand your business.",
-        category: "Business Loans"
+        description: "Suluhisho la ufadhili kukuza na kupanua biashara yako.",
+        category: "Mikopo ya Biashara"
     },
     {
         _id: "5",
-        name: "Education Support Loan",
+        name: "Mikopo ya Msaada wa Elimu",
         image: product_5,
         price: 3000,
-        description: "Financial assistance for tuition fees and academic needs.",
-        category: "Education Loans"
+        description: "Msaada wa kifedha kwa ada za masomo na mahitaji ya kielimu.",
+        category: "Mikopo ya Elimu"
     },
     {
         _id: "6",
-        name: "Financial Advisory Service",
+        name: "Huduma ya Ushauri wa Kifedha",
         image: product_6,
-        price: 0, // Free or consultation-based
-        description: "Expert financial guidance to help you manage money effectively.",
-        category: "Financial Advisory"
+        price: 0, // Bure au kwa msingi wa ushauri
+        description: "Mwongozo wa kifedha kutoka kwa wataalamu kukusaidia kusimamia pesa zako kwa ufanisi.",
+        category: "Ushauri wa Kifedha"
     },
 ];
-
-

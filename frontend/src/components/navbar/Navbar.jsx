@@ -14,10 +14,10 @@ const Navbar = ({setShowLogin}) => {
       <Link to='/'>  <img src={assets.logo} alt=""   className='logo'/></Link>  
         <ul className="navbar-menu">
             
-            <Link to='/' onClick={()=>setMenu("how")}    className={menu === "how" ? "active" : ""}>How it works</Link>
-            <a href='#loan-products'  onClick={()=>setMenu("loan")} className={menu === "loan" ? "active" : ""}>Loan Products</a>
-            <a href='#loanitem' onClick={()=>setMenu("group")}  className={menu === "group" ? "active" : ""}>Group Savings</a>
-            <a href='#footer' onClick={()=>setMenu("contact")}  className={menu === "contact" ? "active" : ""}>Contact us</a>
+            <Link to='/' onClick={()=>setMenu("how")}    className={menu === "how" ? "active" : ""}>jinsi inavyofanya kazi</Link>
+            <a href='#loan-products'  onClick={()=>setMenu("loan")} className={menu === "loan" ? "active" : ""}>Bidhaa za Mikopo</a>
+            <a href='#loanitem' onClick={()=>setMenu("group")}  className={menu === "group" ? "active" : ""}>akiba ya kikundi</a>
+            <a href='#footer' onClick={()=>setMenu("contact")}  className={menu === "contact" ? "active" : ""}>wasiliana nasi</a>
         </ul>
         <div className="navbar-right">
             <img src={assets.search_icon} alt="" />

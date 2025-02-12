@@ -7,14 +7,14 @@ export const Loanitems = ({id,name,price,description,image,category}) => {
   return (
     <div className='loan-item' id='loanitem'>
         <div className="loan-item-img-container">
-            <img className='loan-item-img' src={image} alt="" />
-            {!category.includes("Loan")?(
+            <img className='loan-item-img' src={image} alt=""   />
+            {!category.includes("Mikopo")?(
                 <div className="loan-button">
-                   <button>Join Now</button>
+                   <Link to='/mchama'><button>Jiunge sasa</button></Link>
                 </div>
             ): (
                 <div className="loan-button">
-               <Link to='/cart'><button>Apply Now</button></Link> 
+               <Link to='/cart'><button>Omba sasa</button></Link> 
             </div>
 
             )}

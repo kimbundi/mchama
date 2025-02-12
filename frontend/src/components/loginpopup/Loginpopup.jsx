@@ -14,19 +14,20 @@ const Loginpopup = ({setShowLogin}) => {
                 <img  onClick={()=>setShowLogin(false)}  src={assets.cross_icon} alt="" />
             </div>
             <div className="login-popup-inputs">
-                {currState === 'login' ? <></> :                <input type="text" placeholder='Your Name' required />
- }                <input type="email" placeholder='Your Email' required />
-                <input type="password" placeholder='Password' required />
+                {currState === 'login' ? <></> :                <input type="text" placeholder='JINA YAKO' required />
+ }                <input type="email" placeholder='Barua Pepe Yako' required />
+                <input type="password" placeholder='Weka Neno Lako la siri' required />
 
             </div>
-            <button>{currState === 'sign up' ? 'Create account' : "Login"}</button>
+            <button>{currState === 'sign up' ? 'Fungua akaunti mpya' : "Login"}</button>
             <div className='login-popup-condition'>
                 <input type="checkbox" name="" id=""  required />
-                <p>By continuing,i agree to the terms of use & privacy policy</p>
+                <p>Kwa kuendelea, ninakubali sheria na masharti na sera ya faragha</p>
 
             </div>
-            {currState === 'login' ?            <p>Create a new account? <span  onClick={()=>setCurrState('sign up')}>Click here</span></p>
-:             <p>Already have an account?<span  onClick={()=>setCurrState('login')}>Login here</span></p>
+            {currState === 'login' ?            <p>Fungua akaunti mpya? <span  onClick={()=>setCurrState('sign up')}>Bonyeza hapa</span></p>
+:             <p>Je, tayari una akaunti?<span  onClick={()=>setCurrState('login')}>kuingia login
+</span></p>
 }
         </form>
 

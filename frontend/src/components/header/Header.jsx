@@ -5,11 +5,11 @@ const Header = () => {
   return (
     <div className='header'>
         <div className="header-contents">
-            <h2>Empowering Financial Growth with Loans & Group Savings</h2>
-            <p>Join our platform to access affordable loans, manage your group savings *mchamas*, 
-          and achieve your financial goals with ease. Together, we build stronger communities.
+            <h2>Kuimarisha Ukuaji wa Kifedha kwa Mikopo na Akiba za Kikundi</h2>
+            <p>Jiunge na jukwaa letu upate mikopo nafuu, usimamie akiba za kikundi mchamas,
+            na ufikie malengo yako ya kifedha kwa urahisi. Pamoja, tunajenga jamii imara
         </p>
-        <button>Get Started Today</button>
+        <button>Anza leo</button>
         
 
         </div>
