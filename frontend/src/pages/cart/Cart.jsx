@@ -7,35 +7,35 @@ const Cart = () => {
   <div className="place-loan-left">
     <p className='title'>Jaza Maelezo ili Kupokea Mkopo</p>
     <div className="multi-fields">
-      <input type="text"  placeholder='Jina la Kwanza'/>
-      <input type="text"  placeholder='Jina la Mwisho' />
+      <input type="text"  required  placeholder='Jina la Kwanza'/>
+      <input type="text"  required  placeholder='Jina la Mwisho' />
     
     
-    <input type="text"  placeholder='Nambari ya Kitambulisho/Nambari ya Pasipoti' />
+    <input type="text"  required  placeholder='Nambari ya Kitambulisho/Nambari ya Pasipoti' />
     <input type="email"   placeholder='Anwani ya Barua Pepe'/>
     <input type="number"  placeholder='Nambari ya Simu' />
 
     </div>
     
     <div className="multi-fields">
-      <input type="text"  placeholder='Anwani ya Nyumbani'/>
-      <input type="text"  placeholder='Nambari ya Posta' />
+      <input type="text"  required  placeholder='Anwani ya Nyumbani'/>
+      <input type="text"  required  placeholder='Nambari ya Posta' />
     </div>
     <div className="multi-fields">
-      <input type="text"  placeholder='Hali ya Ajira'/>
-      <input type="text"  placeholder='Mapato ya Kila Mwezi' />
+      <input type="text"  required  placeholder='Hali ya Ajira'/>
+      <input type="text"  required  placeholder='Mapato ya Kila Mwezi' />
     </div>
   </div>
   <div className="place-loan-right">
     <div className="multi-fields">
-      <input type="text"  placeholder='Kiasi cha Mkopo Kinachohitajika'/>
-      <input type="text"  placeholder='Madhumuni ya Mkopo' />
-      <input type="text"  placeholder='Muda wa Kulipa Mkopo' />
+      <input type="text"  required  placeholder='Kiasi cha Mkopo Kinachohitajika'/>
+      <input type="text"  required  placeholder='Madhumuni ya Mkopo' />
+      <input type="text"  required  placeholder='Muda wa Kulipa Mkopo' />
     </div>
     <div className="multi-fields">
-      <input type="text"  placeholder='Jina la Mtu wa Karibu'/>
-      <input type="text"  placeholder='Nambari ya Simu ya Mtu wa Karibu' />
-      <input type="text"  placeholder='Uhusiano' />
+      <input type="text"  required  placeholder='Jina la Mtu wa Karibu'/>
+      <input type="text"  required  placeholder='Nambari ya Simu ya Mtu wa Karibu' />
+      <input type="text"  required  placeholder='Uhusiano' />
     </div>
     <div className='place-btn'>
       <input type="checkbox" name="" id="" />
