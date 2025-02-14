@@ -15,7 +15,7 @@ const Loginpopup = ({setShowLogin}) => {
             </div>
             <div className="login-popup-inputs">
                 {currState === 'login' ? <></> :                <input type="text" placeholder='JINA YAKO' required />
- }                <input type="email" placeholder='Barua Pepe Yako' required />
+ }                <input type="text" placeholder='Nambari ya kitambulisho' required />
                 <input type="password" placeholder='Weka Neno Lako la siri' required />
 
             </div>
