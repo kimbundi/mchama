@@ -7,6 +7,8 @@ import Placeloan from './pages/placeloan/Placeloan'
 import Footer from './components/footer/Footer'
 import Loginpopup from './components/loginpopup/Loginpopup'
 import MchamaGroupSavings from './pages/groupsavings/Mchama'
+import About from './components/aboutus/About'
+import Mchama from './pages/groupsavings/Mchama'
 
 const App = () => {
 
@@ -23,7 +25,8 @@ const [showLogin,setShowLogin] = useState(false)
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/order' element={<Placeloan/>}/>
-        <Route path='/mchama' element={<MchamaGroupSavings/>}/>
+        <Route path='/mchama' element={<Mchama/>}/>
+        <Route path='/about' element={<About/>}/>
 
       </Routes>
 
