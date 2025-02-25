@@ -95,6 +95,60 @@
   font-size: 14px;
 }
 
+
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between checkbox and label */
+  margin-bottom: 1rem;
+}
+
+.terms-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.terms-label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prev-button {
+  background-color: #d1d5db; /* Gray-300 */
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.prev-button:hover {
+  background-color: #9ca3af; /* Gray-400 */
+}
+
+.submit-button {
+  background-color: rgb(59, 59, 196); /* Green-500 */
+  color: white;
+  padding: 0.5rem 1rem;
+  width: 200px;
+  border: none;
+  border-radius: 1rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #059669; /* Green-600 */
+}
+
 .form-input:focus, .form-select:focus {
   outline: none;
   border-color: #4caf50;
@@ -150,6 +204,36 @@
 .next-button:hover {
   background-color: #0056b3;
 }
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.form-input.readonly {
+  background-color: #f3f3f3;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-input.readonly {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
 
 
 /* Responsive Design */
@@ -214,6 +298,26 @@
 .btn:hover {
   background-color: #45a049;
 }
+.prev-button {
+  background-color: #d52a13; /* Dark gray background */
+  color: #fff; /* White text */
+  padding: 10px 20px; /* Spacing inside the button */
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Text size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.prev-button:hover {
+  background-color: #2d3748; /* Darker shade on hover */
+  transform: scale(1.05); /* Slight grow effect */
+}
+
+.prev-button:active {
+  transform: scale(0.95); /* Slight shrink when clicked */
+}
+
 
 /* 📱 Responsive for smaller screens */
 @media (max-width: 600px) {

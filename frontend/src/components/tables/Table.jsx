@@ -22,20 +22,20 @@ const Table = () => {
     const updatedRows = rows.filter((_, i) => i !== index);
     setRows(updatedRows);
   };
-
   const handleSaveChanges = () => {
     const hasEmptyFields = rows.some(row => 
       !row.name.trim() || !row.phone.trim() || !row.email.trim() || !row.role.trim()
     );
-
+  
     if (hasEmptyFields) {
       alert('Please fill out all fields before saving.');
       return;
     }
-
-    console.log('Saved Data:', rows); // Replace with an API call or local storage
+  
+    localStorage.setItem('tableData', JSON.stringify(rows)); // Save to localStorage
     alert('Changes saved successfully!');
   };
+  
 
   return (
     <div className="table-container">

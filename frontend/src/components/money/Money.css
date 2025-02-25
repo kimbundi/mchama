@@ -1,0 +1,59 @@
+.money-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #e2e8f0;
+    color: #2d3748;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .button-group button:hover {
+    background-color: #cbd5e0;
+    transform: scale(1.05);
+  }
+  
+  .button-group button.active {
+    background-color: #4a5568;
+    color: white;
+  }
+  
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input,
+  select {
+    padding: 8px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: #4a5568;
+    outline: none;
+  }
+  

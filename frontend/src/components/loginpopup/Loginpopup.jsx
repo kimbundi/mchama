@@ -11,7 +11,7 @@ const Loginpopup = ({setShowLogin}) => {
         <form action="" className="login-popup-container">
             <div className="login-popup-title">
                 <h2>{currState}</h2>
-                <img  onClick={()=>setShowLogin(false)}  src={assets.cross_icon} alt="" />
+                <img  onClick={()=>setShowLogin(false)}  src={assets.cross_icon} alt="not" />
             </div>
             <div className="login-popup-inputs">
                 {currState === 'login' ? <></> :                <input type="text" placeholder='JINA YAKO' required />

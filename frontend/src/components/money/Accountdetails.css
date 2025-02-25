@@ -1,0 +1,45 @@
+.money-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-heading {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+  }
+  
+  .details-section {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+  }
+  
+  .details-section h3 {
+    margin-bottom: 0.8rem;
+    color: #4caf50;
+  }
+  
+  .details-section p {
+    font-size: 1rem;
+    margin: 0.4rem 0;
+  }
+  
+  @media (max-width: 600px) {
+    .details-section p {
+      font-size: 0.9rem;
+    }
+  
+    .table-heading {
+      font-size: 1.4rem;
+    }
+  }
+  
