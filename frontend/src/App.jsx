@@ -9,6 +9,8 @@ import Loginpopup from './components/loginpopup/Loginpopup'
 import MchamaGroupSavings from './pages/groupsavings/Mchama'
 import About from './components/aboutus/About'
 import Mchama from './pages/groupsavings/Mchama'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 
@@ -19,6 +21,7 @@ const [showLogin,setShowLogin] = useState(false)
     <>
     {showLogin?<Loginpopup  setShowLogin={setShowLogin}/>:<></>}
     <div className='app'>
+      <ToastContainer/>
       <Navbar setShowLogin={setShowLogin}/>
 
       <Routes>
