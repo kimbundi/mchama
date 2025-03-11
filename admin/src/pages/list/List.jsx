@@ -11,17 +11,19 @@ const List = () => {
   const url = "https://mchama-backend.onrender.com"
 
   const [list,setList] = useState([]);
-  const fetchList = async ()=>{
-    const response = await axios.get(`${url}/api/loan/list`)
-    
-    if(response.data.success) {
-     
-      setList(response.data.data)
+  const fetchList = async () => {
+    try {
+        const response = await axios.get(`${url}/api/loan/list`);
+        if (response.data.success) {
+            setList(response.data.data);
+        } else {
+            toast.error("Failed to fetch data");
+        }
+    } catch (error) {
+        toast.error("Error fetching loans: " + (error.response?.data?.message || error.message));
     }
-    else{
-      toast.error("Error")
-    }
-  }
+};
+
   useEffect(()=>{
     fetchList();
 
