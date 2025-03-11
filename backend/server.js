@@ -14,15 +14,15 @@ const port = process.env.PORT || 4000;
 app.use(express.json())
 
 
-//access 
- const corsOptions = {
-    origin: ['https://mchama-frontend.onrender.com', 'https://mchama-adminn.onrender.com'], // Allow both frontends
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// Allow requests from your frontend domain
+const corsOptions = {
+    
+    origin: ["https://mchama-frontend.onrender.com"],
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true, // ✅ Allow cookies or tokens in requests
 };
-
 app.use(cors(corsOptions));
-
 
 //db connection
 connectDB();
