@@ -4,7 +4,7 @@ import { services_list } from "../assets/assets";
 export const storeContext = createContext(null);
 
 const StoreContextProvider =(props) =>{
-    const url = "http://localhost:4000";  // Base URL
+    const url = "https://mchama-backend.onrender.com/";  // Base URL
   const [token, setToken] = useState("");
   const[loan_data,setLoanData] = useState([]);
   
