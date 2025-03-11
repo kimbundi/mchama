@@ -30,6 +30,7 @@ const [showLogin,setShowLogin] = useState(false)
         <Route path='/order' element={<Placeloan/>}/>
         <Route path='/mchama' element={<Mchama/>}/>
         <Route path='/about' element={<About/>}/>
+        <Route path='/login' element={<Loginpopup/>}/>
 
       </Routes>
 

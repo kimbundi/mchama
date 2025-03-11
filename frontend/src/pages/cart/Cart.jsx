@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Cart.css';
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { storeContext } from '../../context/Storecontext';
+
+
 
 const Cart = () => {
-  const url = "http://localhost:4000";
+  const {url} = useContext(storeContext);
+
+  
+
+  
   const [data, setData] = useState({
     name: "",
     lastname: "",
