@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 
 
 const List = () => {
-  const url=" http://localhost:4000"
+  const url = "https://mchama-backend.onrender.com"
 
   const [list,setList] = useState([]);
   const fetchList = async ()=>{
