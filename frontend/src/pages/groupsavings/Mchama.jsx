@@ -3,7 +3,8 @@ import './Mchama.css';
 import Table from '../../components/tables/Table';
 import Contribution from '../../components/groupcontribution/Contribution';
 import Money from '../../components/money/Money';
-import ReactJson from 'react-json-view';
+import { JSONTree } from 'react-json-tree';
+
 import ContributionDetails from '../../components/groupcontribution/Contributiondetails';
 import MemberDetails from '../../components/tables/Memberdetails';
 import AccountDetails from '../../components/money/Accountdetails';
