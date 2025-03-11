@@ -16,7 +16,7 @@ app.use(express.json())
 
 // Allow requests from your frontend domain
 const corsOptions = {
-    origin: 'https://mchama-frontend.onrender.com/', // Frontend URL
+    origin: ['https://mchama-frontend.onrender.com'], // Frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
   };
