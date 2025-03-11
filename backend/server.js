@@ -15,14 +15,19 @@ app.use(express.json())
 
 
 // Allow requests from your frontend domain
+
 const corsOptions = {
-    
-    origin: ["https://mchama-frontend.onrender.com"],
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    origin: [
+        "https://mchama-frontend.onrender.com",
+        "https://mchama-adminn.onrender.com"
+    ], // ✅ Allow both frontends
+    methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Ensure methods are in array format
+    allowedHeaders: ["Content-Type", "Authorization"], // ✅ Ensure headers are in array format
     credentials: true, // ✅ Allow cookies or tokens in requests
 };
+
 app.use(cors(corsOptions));
+
 
 //db connection
 connectDB();
