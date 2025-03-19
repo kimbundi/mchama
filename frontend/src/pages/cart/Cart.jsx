@@ -1,17 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import navigation hook
 import './Cart.css';
-import axios from 'axios'
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import { storeContext } from '../../context/Storecontext';
 
-
-
 const Cart = () => {
-  const {url} = useContext(storeContext);
+  const { url, token } = useContext(storeContext);
+  const navigate = useNavigate(); // Hook for navigation
 
-  
+  // Redirect if user is not authenticated
+  useEffect(() => {
+    if (!token) {
+      toast.error("Tafadhali ingia kwanza!"); // Show a warning message
+      navigate('/login'); // Redirect to login page
+    } 
+  }, [token, navigate])
+  ;
 
-  
   const [data, setData] = useState({
     name: "",
     lastname: "",
@@ -31,20 +37,24 @@ const Cart = () => {
     const { name, value } = event.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("Form Data Being Sent:", data); // Debugging
-  
+    console.log("Form Data Being Sent:", data);
+
     try {
       const response = await axios.post(`${url}/api/loan/add`, {
         ...data,
-        loanrequired: parseInt(data.loanrequired), // Ensure it's a number
+        loanrequired: parseInt(data.loanrequired),
       }, {
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}` // Include the token
+        },
       });
-  
+
       console.log("Response from Backend:", response.data);
-  
+
       if (response.data.success) {
         setData({
           name: "",
@@ -60,7 +70,8 @@ const Cart = () => {
           dependnumber: "",
           relationship: "",
         });
-        toast.success("Ombi la mkopo limewasilishwa kwa mafanikio!")
+        toast.success("Ombi la mkopo limewasilishwa kwa mafanikio!");
+        navigate("/order")
       } else {
         toast.error("Imeshindikana kuwasilisha ombi la mkopo.");
       }
@@ -70,9 +81,8 @@ const Cart = () => {
     }
   };
 
-
   return (
-    <form className='place-loan'  onSubmit={onSubmitHandler}>
+    <form className='place-loan' onSubmit={onSubmitHandler}>
       <div className="place-loan-left">
         <p className='title'>Jaza Maelezo ili Kupokea Mkopo</p>
         <div className="multi-fields">

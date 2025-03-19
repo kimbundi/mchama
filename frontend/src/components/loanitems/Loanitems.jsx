@@ -25,13 +25,9 @@ export const Loanitems = ({id,name,price,description,image,category}) => {
 
         </div>
         <div className="loan-item-info">
-            <div className="loan-item-name-rating">
-                <p>{name}</p>
-                <img src={assets.rating_starts} alt="" />
-
-            </div>
+            
             <p className="loan-item-desc">{description}</p>
-            <p className="loan-item-price"> min kes {price}</p>
+           
         </div>
     </div>
   )

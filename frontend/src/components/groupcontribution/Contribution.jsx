@@ -1,25 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+import { storeContext } from '../../context/Storecontext';
 import './Contribution.css';
 
 const Contribution = () => {
+  const { url, list } = useContext(storeContext);
+
   const [formData, setFormData] = useState({
     contributionName: '',
     memberContribution: '',
     startDate: '',
     frequency: '',
     wish: '',
+    groupId: '',
   });
+
+  // Auto-set first available group ID when list updates
+  useEffect(() => {
+    if (list.length > 0) {
+      setFormData(prev => ({ ...prev, groupId: list[0] })); // Set first group_id
+    }
+  }, [list]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    localStorage.setItem('contributionData', JSON.stringify(formData)); // You can replace this with an API call to store in a database
-    alert("Mchango umehifadhiwa kwa mafanikio!");
+    console.log("Form Data Being Sent:", formData);
+
+    try {
+      const response = await axios.post(`${url}/api/contribution/add`, formData, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      console.log("Response from Backend:", response.data);
+
+      if (response.data.success) {
+        toast.success("✅ Mchango umehifadhiwa kwa mafanikio!", { position: "top-right", autoClose: 3000 });
+
+        setFormData({
+          contributionName: '',
+          memberContribution: '',
+          startDate: '',
+          frequency: '',
+          wish: '',
+          groupId: list.length > 0 ? list[0] : '', // Reset with first group_id
+        });
+      } else {
+        toast.error("❌ Mchango haujahifadhiwa. Tafadhali jaribu tena.", { position: "top-right", autoClose: 3000 });
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error.response?.data || error.message);
+      toast.error("❌ Kuna tatizo. Tafadhali jaribu tena.", { position: "top-right", autoClose: 3000 });
+    }
   };
 
   return (
@@ -31,10 +69,29 @@ const Contribution = () => {
           id="contributionName"
           name="contributionName"
           className="form-input"
-          placeholder='mfano akiba'
+          placeholder="mfano akiba"
           value={formData.contributionName}
           onChange={handleChange}
         />
+
+        <label htmlFor="groupid" className="form-label">Chagua Group</label>
+        <select
+          id="group_id"
+          name="groupId"
+          className="form-select"
+          value={formData.groupId}
+          onChange={handleChange}
+        >
+          {list.length === 0 ? (
+            <option value="">Hakuna group zilizopatikana</option>
+          ) : (
+            list.map((id) => (
+              <option key={id} value={id}>
+                {id} {/* You can replace this with a group name if available */}
+              </option>
+            ))
+          )}
+        </select>
 
         <label htmlFor="memberContribution" className="form-label">Mchango wa Kila Mwanachama kwa Mzunguko</label>
         <input
@@ -42,7 +99,7 @@ const Contribution = () => {
           id="memberContribution"
           name="memberContribution"
           className="form-input"
-          placeholder='mfano 2000'
+          placeholder="mfano 2000"
           value={formData.memberContribution}
           onChange={handleChange}
         />
@@ -98,11 +155,13 @@ const Contribution = () => {
         </div>
 
         <div className="button-group">
-          <button type='submit' className="btn save-btn">Hifadhi Mabadiliko</button>
+          <button type="submit" className="btn save-btn">Hifadhi Mabadiliko</button>
           <button
-            type='button'
+            type="button"
             className="btn cancel-btn"
-            onClick={() => setFormData({ contributionName: '', memberContribution: '', startDate: '', frequency: '', wish: '' })}
+            onClick={() =>
+              setFormData({ contributionName: '', memberContribution: '', startDate: '', frequency: '', wish: '', group_id: list.length > 0 ? list[0] : '' })
+            }
           >
             Ghairi
           </button>

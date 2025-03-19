@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
         }
 
         const token = createToken(user._id);
-        res.json({ success: true, token });
+        res.json({ success: true, token, isAdmin: user.isAdmin }); // Send isAdmin to frontend
 
     } catch (error) {
         console.error(error);
@@ -34,26 +34,22 @@ const loginUser = async (req, res) => {
 
 // Register User
 const registerUser = async (req, res) => {
-    const { name, password, phonenumber } = req.body;
+    const { name, password, phonenumber, isAdmin } = req.body; // Accept isAdmin flag
 
     try {
-        // Check if user exists
         const exists = await userModel.findOne({ phonenumber });
         if (exists) {
             return res.json({ success: false, message: "User already exists" });
         }
 
-        // Validate phone number format (Kenyan numbers)
         if (!validator.isMobilePhone(phonenumber, "en-KE")) {
             return res.json({ success: false, message: "Please enter a valid Kenyan phone number" });
         }
 
-        // Validate strong password
         if (password.length < 8) {
-            return res.json({ success: false, message: "Please enter a strong password (at least 8 characters)" });
+            return res.json({ success: false, message: "Password must be at least 8 characters" });
         }
 
-        // Hashing user password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -61,6 +57,7 @@ const registerUser = async (req, res) => {
             name,
             phonenumber,
             password: hashedPassword,
+            isAdmin: isAdmin || false // Default to false unless explicitly set
         });
 
         const user = await newUser.save();

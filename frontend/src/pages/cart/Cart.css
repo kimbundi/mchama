@@ -3,9 +3,14 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #f4f4f4; /* Fallback color */
   border-radius: 8px;
+  background-image: url('./test1.png');
+  background-repeat: no-repeat;
+  background-size: cover; /* Ensures the image covers the area */
+  background-position: center; /* Centers the image */
 }
+
 
 .place-loan-left,
 .place-loan-right {
@@ -17,7 +22,7 @@
 .title {
   font-size: 24px;
   margin-bottom: 15px;
-  color: #333;
+  color: #fff;
 }
 
 .multi-fields {
@@ -76,7 +81,7 @@
 
 .place-btn p {
   font-size: 14px;
-  color: #555;
+  color: #fff;
 }
 
 .place-btn button {

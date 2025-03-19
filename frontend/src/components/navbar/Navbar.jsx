@@ -33,8 +33,8 @@ const Navbar = ({setShowLogin}) => {
         <div className="navbar-right">
             <img src={assets.search_icon} alt="" />
             <div className="navbar-search-icon">
-              <Link to="/cart">  <img src={assets.basket_icon} alt="" /></Link>  
-                <div className="dot"></div>
+              <Link to="/cart">  <img src={assets.basket_icon} alt=""  className='loan-icon' /></Link>  
+                
              
             </div>
             {!token ?
@@ -46,7 +46,8 @@ const Navbar = ({setShowLogin}) => {
                  <ul className="nav-profile-dropdown">
                   <li> <img src={assets.bag_icon} alt="" /><p>Loan Requests</p> </li>
                   <li> <img src={assets.logo} alt="" />  <p>Mchama</p></li>
-                  <hr/>
+                  <Link to="/order">   <p>My Loans</p> </Link>
+                
                   <li  onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
 
                  </ul>

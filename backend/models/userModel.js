@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     phonenumber:{type:Number,required:true,unique:true, trim: true,
         match: /^(?:\+254|0)[17]\d{8}$/},
     password:{type:String,required:true},
-    loanData:{type:Object, default:{}}
+    loanData:{type:Object, default:{}},
+    isAdmin: { type: Boolean, default: false }
 
 },{minimize:false})
 

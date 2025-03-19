@@ -1,4 +1,4 @@
-import basket_icon from './basket_icon.png'
+import basket_icon from './loanicon.png'
 import search_icon from './search_icon.png'
 import add_icon_white from './add_icon_white.png'
 import add_icon_green from './add_icon_green.png'
@@ -16,12 +16,12 @@ import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
 import logo from './logo.png';
-import product_1 from './loan.png'
-import product_2 from './chama.png'
-import product_3 from './emergency.png'
-import product_4 from './business.png'
-import product_5 from './education.png'
-import product_6 from './financial.png'
+import product_1 from './person1.png'
+import product_2 from './person2.png'
+import product_3 from './person3.png'
+import product_4 from './person5.png'
+import product_5 from './person6.png'
+import product_6 from './person4.png'
 
 export const assets = {
     
@@ -74,54 +74,52 @@ export const product_list = [
         product_image: product_6
     },
 ];
-
 export const services_list = [
     {
         _id: "1",
         name: "Mikopo ya Kibinafsi",
         image: product_1,
-        price: 1000, // Mfano wa kiasi cha chini cha mkopo
-        description: "Mikopo ya kibinafsi yenye kubadilika kukidhi mahitaji yako ya kifedha ya haraka.",
+        description: "Pata mkopo wa kibinafsi wenye masharti nafuu ili kufanikisha mahitaji yako ya kifedha. Iwe ni kulipa dharura, kununua mali, au kuboresha maisha yako, mikopo yetu ina viwango vya riba vya ushindani na malipo rahisi.",
+
         category: "Bidhaa za Mikopo"
     },
     {
         _id: "2",
         name: "Mpango wa Akiba za Kikundi",
         image: product_2,
-        price: 500, // Mfano wa amana ya chini ya akiba
-        description: "Suluhisho la akiba la ushirikiano kwa usalama wa kifedha.",
+        description: "Jiunge na mpango wa akiba za kikundi (mchama) ili kuweka akiba kwa usalama na kupata fursa ya mikopo ya masharti nafuu. Mfumo huu hukuwezesha kujenga nidhamu ya kifedha na kufanikisha malengo ya pamoja.",
+
         category: "Akiba za Kikundi/Mchama"
     },
     {
         _id: "3",
         name: "Mikopo ya Dharura ya Haraka",
         image: product_3,
-        price: 2000,
-        description: "Ugavi wa pesa za haraka kwa gharama zisizotarajiwa.",
+        description: "Tunatoa mikopo ya dharura yenye upatikanaji wa haraka kwa gharama zisizotarajiwa kama ada za hospitali, dharura za kifamilia, au marekebisho ya ghafla. Pesa hupatikana kwa muda mfupi na masharti nafuu.",
+
         category: "Mikopo ya Dharura"
     },
     {
         _id: "4",
         name: "Mikopo ya Biashara Ndogo",
         image: product_4,
-        price: 5000,
-        description: "Suluhisho la ufadhili kukuza na kupanua biashara yako.",
+        description: "Je, unataka kuanzisha au kupanua biashara yako? Mikopo yetu ya biashara ndogo hukupa mtaji wa kuimarisha biashara yako, kununua bidhaa, au kupanua huduma zako kwa urahisi na riba nafuu.",
+
         category: "Mikopo ya Biashara"
     },
     {
         _id: "5",
         name: "Mikopo ya Msaada wa Elimu",
         image: product_5,
-        price: 3000,
-        description: "Msaada wa kifedha kwa ada za masomo na mahitaji ya kielimu.",
+        description: "Tunatoa mikopo ya elimu kwa wanafunzi na wazazi wanaohitaji msaada wa kifedha kwa ada za masomo, vitabu, na mahitaji mengine ya kielimu. Riba ni ya chini na malipo yanaweza kupangwa kulingana na muda wa masomo.",
         category: "Mikopo ya Elimu"
     },
     {
         _id: "6",
         name: "Huduma ya Ushauri wa Kifedha",
         image: product_6,
-        price: 0, // Bure au kwa msingi wa ushauri
-        description: "Mwongozo wa kifedha kutoka kwa wataalamu kukusaidia kusimamia pesa zako kwa ufanisi.",
+        description: "Pata mwongozo wa kifedha kutoka kwa wataalamu kuhusu jinsi ya kusimamia mapato yako, kuwekeza kwa busara, na kujiandaa kwa mustakabali wa kifedha. Ushauri wetu unakusaidia kufanya maamuzi sahihi ili kufanikisha malengo yako ya kifedha.",
+
         category: "Ushauri wa Kifedha"
     },
 ];

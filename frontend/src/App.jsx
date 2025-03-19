@@ -11,6 +11,7 @@ import About from './components/aboutus/About'
 import Mchama from './pages/groupsavings/Mchama'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Order from './pages/orders/Order'
 
 const App = () => {
 
@@ -27,7 +28,7 @@ const [showLogin,setShowLogin] = useState(false)
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/order' element={<Placeloan/>}/>
+        <Route path='/order' element={<Order/>}/>
         <Route path='/mchama' element={<Mchama/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/login' element={<Loginpopup/>}/>

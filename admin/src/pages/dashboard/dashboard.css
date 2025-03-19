@@ -1,0 +1,17 @@
+
+.app-content {
+    
+    display: flex;   /* Enables horizontal layout */
+    flex-direction: row;
+    
+    height: calc(100vh - 60px); /* Adjust height based on Navbar */
+    overflow: hidden; /* Prevents extra scrollbars */
+  }
+  .outlet-container {
+    
+    flex-grow: 1; /* Takes remaining width */
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa; /* Light background */
+}
+  

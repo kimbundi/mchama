@@ -1,120 +1,85 @@
-import React from 'react'
-import './List.css'
-import { useState } from 'react'
-import axios from "axios"
-import {toast} from "react-toastify"
-import { useEffect } from 'react'
-
-
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { getAllLoans,removeLoan } from '../../apis'; // Import API functions
+import './List.css';
 
 const List = () => {
-  const url = "https://mchama-backend.onrender.com"
+  const [list, setList] = useState([]);
 
-  const [list,setList] = useState([]);
-  const fetchList = async () => {
+  useEffect(() => {
+    fetchLoans();
+  }, []);
+  const fetchLoans = async () => {
     try {
-        const response = await axios.get(`${url}/api/loan/list`);
-        if (response.data.success) {
-            setList(response.data.data);
-        } else {
-            toast.error("Failed to fetch data");
-        }
+      const response = await getAllLoans();
+      console.log(response)
+      // Debugging
+  
+      if (response && response.success && Array.isArray(response.data)) {
+        setList(response.data); // Ensure it is an array before setting state
+      } else {
+        toast.error("Invalid data format received");
+      }
     } catch (error) {
-        toast.error("Error fetching loans: " + (error.response?.data?.message || error.message));
+      console.error("Error fetching loans:", error);
+      toast.error("Error fetching loans: " + error.message);
     }
-};
+  };
+  const handleDelete = async (loanId) => {
+    try {
+      const response = await removeLoan(loanId);
+      if (response.success) {
+        toast.success(response.message);
+        fetchLoans(); // Refresh list
+      } else {
+        toast.error("Error deleting loan");
+      }
+    } catch (error) {
+      toast.error("Error deleting loan: " + error.message);
+    }
+  };
 
-  useEffect(()=>{
-    fetchList();
-
-  },[])
   const incomeMap = {
     "less_than_30000": "< 30,000",
     "between_30000_and_50000": "30,000 - 50,000",
-    "more_than_50000": "> 50,000"
+    "more_than_50000": "> 50,000",
   };
 
-  const removeLoan = async(loanId) =>{
-   const response = await axios.post(`${url}/api/loan/remove`,{id:loanId})
-   await fetchList();
-   if(response.data.success) {
-    toast.success(response.data.message)
-
-   }
-   else{
-    toast.error("Error")
-   }
-
-  }
-
-  
   return (
-
-
     <div className='list add flex-col'>
-      <p> Loan Requests</p>
+      <p>Loan Requests</p>
       <div className="list-table">
         <div className="list-table-format title">
-         <b>name</b>
-         <b>Lastname</b>
-         <b>idnumber</b>
-         <b>gender</b>
-         <b>phonenumber</b>
-         <b>dob</b>
-         <b>Monthlyincome</b>
-         <b>Loanrequired</b>
-         <b>job</b>
-        
-         <b>Action</b>
+          <b>Name</b>
+          <b>Lastname</b>
+          <b>ID Number</b>
+          <b>Gender</b>
+          <b>Phone No</b>
+          <b>Income</b>
+          <b>Loan</b>
+          <b>Job</b>
+          <b>Action</b>
         </div>
-        {list.map((item,index)=>{
-          
-          
-          <p>Monthly Income: {incomeMap[item?.monthlyincome] || "N/A"}</p>
-          
-          
-          return(
+        {list.length > 0 ? (
+          list.map((item, index) => (
             <div key={index} className='list-table-format'>
               <p>{item.name}</p>
               <p>{item.lastname}</p>
               <p>{item.idnumber}</p>
               <p>{item.gender}</p>
               <p>{item.phonenumber}</p>
-              <p>{item.dob}</p>
-              <p>Monthly Income: {incomeMap[item?.monthlyincome] || item?.monthlyincome || "N/A"}</p>
-<p>Loan Required: {item?.loanrequired?.toLocaleString() || "N/A"}</p>
-
-               
-               
- 
-
-              
+              <p>{incomeMap[item?.monthlyincome] || "N/A"}</p>
+              <p>{item?.loanrequired?.toLocaleString() || "N/A"}</p>
               <p>{item.job}</p>
-              
-          
-              <p  onClick={()=>removeLoan(item._id)}   className='cursor'>x</p>
-
-
-
-
-
-
-
-
-
-
-
-              </div>
-              
-          )
-        })}
+              <p onClick={() => handleDelete(item._id)} className='delete-btn'>Delete</p>
+            </div>
+          ))
+        ) : (
+          <p>No loan requests available.</p>
+        )}
       </div>
-
-
-
-
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;

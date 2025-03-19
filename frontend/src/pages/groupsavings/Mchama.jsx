@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Mchama.css';
 import Table from '../../components/tables/Table';
 import Contribution from '../../components/groupcontribution/Contribution';
@@ -10,9 +10,17 @@ import MemberDetails from '../../components/tables/Memberdetails';
 import AccountDetails from '../../components/money/Accountdetails';
 import GroupSections from '../../components/groupcontribution/Groupsection';
 import Groupname from '../../components/groupcontribution/Groupname';
+import { storeContext } from '../../context/Storecontext';
+
+import axios  from 'axios';
+import { toast } from 'react-toastify';
 
 
 const Mchama = () => {
+  const {url} = useContext(storeContext)
+
+  
+
   const savedData = JSON.parse(localStorage.getItem('formData'));
   const savedTableData = JSON.parse(localStorage.getItem('tableData')) || [];
   const contributionData =JSON.parse( localStorage.getItem('contributionData'));
@@ -21,7 +29,8 @@ console.log(savedTableData); // Logs the saved rows
 const [showNameDetails, setShowNameDetails] = useState(false);
 
 
-  const [formData, setFormData] = useState({
+
+  const [data, setData] = useState({
     groupName: '',
     memberCount: '',
     groupType: '',
@@ -35,16 +44,14 @@ const [showNameDetails, setShowNameDetails] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const [showAccount,setShowAccount] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleRadioChange = (value) => {
-    setFormData((prev) => ({
+    setData((prev) => ({
       ...prev,
       isRegistered: value,
       registrationNumber: value === 'yes' ? prev.registrationNumber : '',
@@ -59,11 +66,40 @@ const [showNameDetails, setShowNameDetails] = useState(false);
     if (currentStep > 1) setCurrentStep((prev) => prev - 1);
   };
 
-  const handleSubmitStep1 = (e) => {
-    e.preventDefault();
-    console.log('Step 1 Data:', formData); // ✅ Data is logged and stored
-    handleNext();
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    console.log("Form Data Being Sent:", data); // Debugging
+  
+    try {
+      const response = await axios.post(`${url}/api/group/add`, {
+        ...data,
+        
+      }, {
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      console.log("Response from Backend:", response.data);
+  
+      if (response.data.success) {
+        setData({
+          groupName: '',
+          memberCount: '',
+          groupType: '',
+          organizationRole: '',
+          operationCounty: '',
+          isRegistered: null,
+          registrationNumber: '',
+        });
+        toast.success("Group has been created successfully")
+      } else {
+        toast.error("Group not created .");
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error.response?.data || error.message);
+      toast.error("Kuna tatizo. Tafadhali jaribu tena.");
+    }
   };
+
   const handleAddAccount = ()=>{
     setShowAccount(true);
 
@@ -94,7 +130,7 @@ const [showNameDetails, setShowNameDetails] = useState(false);
       <hr className='divider' />
 
       {currentStep === 1 && (
-        <form className='group-form' onSubmit={handleSubmitStep1}>
+        <form className='group-form' onSubmit={onSubmitHandler}>
           <h1 className='section-title'>Maelezo ya Uundaji wa Kikundi</h1>
 
           <div className='form-group'>
@@ -103,8 +139,8 @@ const [showNameDetails, setShowNameDetails] = useState(false);
               type="text"
               id="groupName"
               name="groupName"
-              value={formData.groupName}
-              onChange={handleChange}
+              value={data.groupName}
+              onChange={onChangeHandler}
               placeholder='Andika jina la kikundi'
               className='form-input'
               required
@@ -117,8 +153,8 @@ const [showNameDetails, setShowNameDetails] = useState(false);
               type="number"
               id="memberCount"
               name="memberCount"
-              value={formData.memberCount}
-              onChange={handleChange}
+              value={data.memberCount}
+              onChange={onChangeHandler}
               placeholder='mfano: 10'
               min="1"
               className='form-input'
@@ -131,8 +167,8 @@ const [showNameDetails, setShowNameDetails] = useState(false);
             <select
               id="groupType"
               name="groupType"
-              value={formData.groupType}
-              onChange={handleChange}
+              value={data.groupType}
+              onChange={onChangeHandler}
               className='form-select'
               required
             >
@@ -149,8 +185,8 @@ const [showNameDetails, setShowNameDetails] = useState(false);
             <select
               id="organizationRole"
               name="organizationRole"
-              value={formData.organizationRole}
-              onChange={handleChange}
+              value={data.organizationRole}
+              onChange={onChangeHandler}
               className='form-select'
               required
             >
@@ -166,8 +202,8 @@ const [showNameDetails, setShowNameDetails] = useState(false);
             <select
               id="operationCounty"
               name="operationCounty"
-              value={formData.operationCounty}
-              onChange={handleChange}
+              value={data.operationCounty}
+              onChange={onChangeHandler}
               className='form-select'
               required
             >
@@ -184,7 +220,7 @@ const [showNameDetails, setShowNameDetails] = useState(false);
               <input
                 type="radio"
                 name="isRegistered"
-                checked={formData.isRegistered === 'yes'}
+                checked={data.isRegistered === 'yes'}
                 onChange={() => handleRadioChange('yes')}
               /> Ndio
             </label>
@@ -192,20 +228,20 @@ const [showNameDetails, setShowNameDetails] = useState(false);
               <input
                 type="radio"
                 name="isRegistered"
-                checked={formData.isRegistered === 'no'}
+                checked={data.isRegistered === 'no'}
                 onChange={() => handleRadioChange('no')}
               /> Hapana
             </label>
 
-            {formData.isRegistered === 'yes' && (
+            {data.isRegistered === 'yes' && (
               <div className='registration-input'>
                 <label htmlFor="registrationNumber" className='form-label'>Nambari ya Usajili</label>
                 <input
                   type="text"
                   id="registrationNumber"
                   name="registrationNumber"
-                  value={formData.registrationNumber}
-                  onChange={handleChange}
+                  value={data.registrationNumber}
+                  onChange={onChangeHandler}
                   placeholder='Mfano: EGBAZ544GG65'
                   className='form-input'
                   required
@@ -215,8 +251,10 @@ const [showNameDetails, setShowNameDetails] = useState(false);
           </div>
 
           <div className='button-group'>
-            <button type="submit" className='next-button'>Hifadhi na Endelea</button>
+            <button type="submit" className='next-button'>Hifadhi</button>
+            <button onClick={handleNext} className='next-button'>Endelea</button>
           </div>
+         
         </form>
       )}
 
@@ -267,22 +305,12 @@ const [showNameDetails, setShowNameDetails] = useState(false);
  <button className="section-button" onClick={() => setShowNameDetails(!showNameDetails)}>
         {showNameDetails ? '🔽' : '▶️'} Taarifa Za Kikundi
       </button>
-      {showNameDetails && (
-        
- <div className='summary-box'>
- <p><strong> Jina la Kikundi:</strong> {formData.groupName || 'Hakuna jibu'}</p>
- <p><strong> Idadi ya Wanachama:</strong> {formData.memberCount || 'Hakuna jibu'}</p>
- <p><strong> Aina ya Kikundi:</strong> {formData.groupType || 'Hakuna jibu'}</p>
- <p><strong> Nafasi Yako katika Shirika:</strong> {formData.organizationRole || 'Hakuna jibu'}</p>
- <p><strong> Kaunti ya Uendeshaji:</strong> {formData.operationCounty || 'Hakuna jibu'}</p>
- <p><strong> Je, shirika limeandikishwa?:</strong> 
-   {formData.isRegistered === 'yes' ? 'Ndio' : formData.isRegistered === 'no' ? 'Hapana' : 'Hakuna jibu'}
- </p>
+      {showNameDetails && 
+      (
 
- {formData.isRegistered === 'yes' && (
-   <p><strong> Nambari ya Usajili:</strong> {formData.registrationNumber || 'Hakuna jibu'}</p>
- )}
-</div>
+       
+        <Groupname/>
+
         
       )}
 
@@ -291,6 +319,7 @@ const [showNameDetails, setShowNameDetails] = useState(false);
 )}
      
       <GroupSections/>
+
       <div className="terms-container">
 
       <input type="checkbox" name="" id=""    className="terms-checkbox"/>

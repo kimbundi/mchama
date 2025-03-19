@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Money.css';
+import { storeContext } from '../../context/Storecontext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Money = () => {
+
+  const {url,list} = useContext(storeContext);
   const [activeAccount, setActiveAccount] = useState('money'); // Active form selection
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState({
     provider: '',
+    groupId: '',
     moneyAccountName: '',
     moneyAccountNumber: '',
     moneyInitialBalance: '',
@@ -14,19 +20,58 @@ const Money = () => {
     groupInitialBalance: '',
   });
 
+  // Auto-set first available group ID when list updates
+  useEffect(() => {
+    if (list.length > 0) {
+      setData(prev => ({ ...prev, groupId: list[0] })); // Set first group_id
+    }
+  }, [list]);
   // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Saved Data:', formData); // Replace with API call or local storage
-    alert('Data saved successfully!');
-  };
-  localStorage.setItem('formData', JSON.stringify(formData));
+  // Handle form submission;
+  
+    const onSubmitHandler = async (event) => {
+      event.preventDefault();
+      console.log("Form Data Being Sent:", data); // Debugging
+    
+      try {
+        const response = await axios.post(`${url}/api/bank/add`, {
+          ...data,
+          
+        }, {
+          headers: { "Content-Type": "application/json" },
+        });
+    
+        console.log("Response from Backend:", response.data);
+    
+        if (response.data.success) {
+          setData({
+            provider: '',
+            groupId: list.length > 0 ? list[0] : '',
+            moneyAccountName: '',
+            moneyAccountNumber: '',
+            moneyInitialBalance: '',
+            groupAccountName: '',
+            groupBankName: '',
+            groupAccountNumber: '',
+            groupInitialBalance: '',
+          });
+          toast.success("data has been saved successfully!")
+        } else {
+          toast.error("data not saved.");
+        }
+      } catch (error) {
+        console.error("Fetch Error:", error.response?.data || error.message);
+        toast.error("Kuna tatizo. Tafadhali jaribu tena.");
+      }
+    };
+  
+  
 
 
   return (
@@ -46,11 +91,31 @@ const Money = () => {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="form-section">
+      <form onSubmit={onSubmitHandler} className="form-section">
         {activeAccount === 'money' && (
           <>
+
+<label htmlFor="groupid" className="form-label">Chagua Group</label>
+        <select
+          id="group_id"
+          name="groupId"
+          className="form-select"
+          value={data.groupId}
+          onChange={onChangeHandler}
+        >
+          {list.length === 0 ? (
+            <option value="">Hakuna group zilizopatikana</option>
+          ) : (
+            list.map((id) => (
+              <option key={id} value={id}>
+                {id} {/* You can replace this with a group name if available */}
+              </option>
+            ))
+          )}
+        </select>
+
             <label>Mobile Money Provider</label>
-            <select name="provider" value={formData.provider} onChange={handleChange} required>
+            <select name="provider" value={data.provider} onChange={onChangeHandler} required>
               <option value="">--select-mobile-moneyprovider--</option>
               <option value="mpesa">Safaricom Mpesa</option>
               <option value="airtel">Airtel Money</option>
@@ -61,8 +126,8 @@ const Money = () => {
             <input
               type="text"
               name="moneyAccountName"
-              value={formData.moneyAccountName}
-              onChange={handleChange}
+              value={data.moneyAccountName}
+              onChange={onChangeHandler}
               placeholder="Account Name"
               required
             />
@@ -71,8 +136,8 @@ const Money = () => {
             <input
               type="number"  maxLength='10'
               name="moneyAccountNumber"
-              value={formData.moneyAccountNumber}
-              onChange={handleChange}
+              value={data.moneyAccountNumber}
+              onChange={onChangeHandler}
               placeholder="Phone Number/Till Number/Paybill"
               required
             />
@@ -81,8 +146,8 @@ const Money = () => {
             <input
               type="currency"
               name="moneyInitialBalance"
-              value={formData.moneyInitialBalance}
-              onChange={handleChange}
+              value={data.moneyInitialBalance}
+              onChange={onChangeHandler}
               placeholder="Account Balance"
               required
             />
@@ -91,12 +156,33 @@ const Money = () => {
 
         {activeAccount === 'group' && (
           <>
+
+
+<label htmlFor="groupid" className="form-label">Chagua Group</label>
+        <select
+          id="group_id"
+          name="groupId"
+          className="form-select"
+          value={data.groupId}
+          onChange={onChangeHandler}
+        >
+          {list.length === 0 ? (
+            <option value="">Hakuna group zilizopatikana</option>
+          ) : (
+            list.map((id) => (
+              <option key={id} value={id}>
+                {id} {/* You can replace this with a group name if available */}
+              </option>
+            ))
+          )}
+        </select>
+
             <label>Group Account Name</label>
             <input
               type="text"
               name="groupAccountName"
-              value={formData.groupAccountName}
-              onChange={handleChange}
+              value={data.groupAccountName}
+              onChange={onChangeHandler}
               placeholder="Group Name"
               required
             />
@@ -105,8 +191,8 @@ const Money = () => {
             <input
               type="text"
               name="groupBankName"
-              value={formData.groupBankName}
-              onChange={handleChange}
+              value={data.groupBankName}
+              onChange={onChangeHandler}
               placeholder="Bank Name"
               required
             />
@@ -115,8 +201,8 @@ const Money = () => {
             <input
               type="number" maxLength='10'
               name="groupAccountNumber"
-              value={formData.groupAccountNumber}
-              onChange={handleChange}
+              value={data.groupAccountNumber}
+              onChange={onChangeHandler}
               placeholder="Account Number"
               required
             />
@@ -125,8 +211,8 @@ const Money = () => {
             <input
               type="number"
               name="groupInitialBalance"
-              value={formData.groupInitialBalance}
-              onChange={handleChange}
+              value={data.groupInitialBalance}
+              onChange={onChangeHandler}
               placeholder="Initial Balance"
               required
             />

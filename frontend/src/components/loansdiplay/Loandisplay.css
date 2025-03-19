@@ -1,17 +1,75 @@
-.loan-display{
-    margin-top: 30px;
-
+.loan-display {
+    padding: 50px 8%;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    text-align: center;
 }
-.loan-display h2{
-    font-size: max(2vw,24px);
+
+.loan-display h2 {
+    font-size: 2.5rem;
     font-weight: 600;
-
+    color: #333;
+    margin-bottom: 20px;
 }
-.loan-display-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-    margin-top: 30px;
-    gap: 30px;
-    row-gap: 50px;
 
+.loan-display-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.loan-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.loan-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.loan-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.loan-item h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+    margin: 15px 0;
+}
+
+.loan-item p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.loan-item .loan-category {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .loan-display {
+        padding: 40px 5%;
+    }
+
+    .loan-display h2 {
+        font-size: 2rem;
+    }
+
+    .loan-display-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }

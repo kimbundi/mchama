@@ -1,0 +1,276 @@
+/* General Styling */
+.tracking-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.tracking-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    text-align: center;
+    color: #222;
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Loan Info Styling */
+.loan-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 6px solid #007bff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.loan-info:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Loan Info Grid */
+.loan-info p {
+    margin: 6px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.loan-info strong {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Requested Loan Amount (Green) */
+.requested-loan {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Approved Loan Amount (Green with Circle) */
+.approved-loan {
+    color: #fff;
+    background-color: #008000; /* Darker Green */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 25px;
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(0, 128, 0, 0.2);
+}
+
+/* Rejected Loan (Red with Circle) */
+.rejected-loan {
+    color: #fff;
+    background-color: #d32f2f; /* Bright Red */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 25px;
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(211, 47, 47, 0.2);
+}
+
+/* Loan Status Styling */
+.loan-status {
+    font-weight: bold;
+}
+
+/* Color for Different Loan Status */
+.loan-status.approved {
+    color: #008000; /* Green for Approved */
+}
+
+.loan-status.rejected {
+    color: #d32f2f; /* Red for Rejected */
+}
+
+.loan-status.pending {
+    color: #ff9800; /* Orange for Pending */
+}
+
+/* Divider */
+hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+/* Repay Button */
+.repay-button {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 10px 0;
+}
+
+.repay-button:hover {
+    background: #0056b3;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Popup Container */
+.popup-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup Heading */
+.popup-container h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Input Field */
+.popup-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Popup Buttons */
+.popup-buttons {
+    margin-top: 15px;
+}
+
+.confirm-button {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.confirm-button:hover {
+    background: #1e7e34;
+}
+
+.cancel-button {
+    background: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+/* Repayment Duration Styling */
+.repayment-duration {
+    font-weight: bold;
+    color: #ffa500; /* Orange */
+}
+
+/* Approved Loan Styling */
+.approved-loan {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Rejected Loan Styling */
+.rejected-loan {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Loan Status */
+.loan-status {
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Colors for Different Statuses */
+.loan-status.approved {
+    background: #28a745;
+    color: white;
+}
+
+.loan-status.rejected {
+    background: #dc3545;
+    color: white;
+}
+
+.loan-status.pending {
+    background: #ffc107;
+    color: black;
+}
+
+
+.cancel-button:hover {
+    background: #b02a37;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tracking-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .loan-info {
+        padding: 15px;
+    }
+}

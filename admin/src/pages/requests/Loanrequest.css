@@ -1,0 +1,99 @@
+.loan-requests {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.loan-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.loan-table-header, .loan-table-row {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 2fr 1.5fr 1fr;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.loan-table-header {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+}
+
+.loan-table-row:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.loan-table-row p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.update-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.update-section h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.update-section select, 
+.update-section input {
+    width: 80%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.update-section button {
+    width: 50%;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .loan-table-header, .loan-table-row {
+        grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+    }
+
+    .update-section select, 
+    .update-section input, 
+    .update-section button {
+        width: 100%;
+    }
+}
