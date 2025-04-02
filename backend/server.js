@@ -35,7 +35,7 @@ const corsOptions = {
 };
 //use corsoptions when live on render
 
-app.use(cors());
+ app.use(cors(corsOptions));
 
 
 //db connection
