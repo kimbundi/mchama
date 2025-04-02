@@ -1,0 +1,80 @@
+/* Container */
+.group-details-container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Title */
+.group-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.update-btn:disabled {
+    background-color: #a0a0a0; /* Gray color for disabled state */
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Loading and Error Messages */
+.loading-message {
+    text-align: center;
+    font-size: 16px;
+    color: blue;
+    font-weight: bold;
+}
+
+.error-message {
+    text-align: center;
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+
+/* Table Styling */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.details-table th,
+.details-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.details-table th {
+    background: #007bff;
+    color: white;
+}
+
+.details-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.details-table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .group-details-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .details-table th,
+    .details-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

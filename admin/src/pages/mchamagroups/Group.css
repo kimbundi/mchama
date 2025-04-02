@@ -1,0 +1,103 @@
+/* Container */
+.groups-container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Enables scrolling on small screens */
+}
+
+/* Title */
+.dashboard-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Loading and Error Messages */
+.loading-message,
+.error-message {
+    text-align: center;
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+
+/* No Groups Found */
+.no-groups {
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+}
+
+/* Table Styling */
+.groups-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.groups-table th,
+.groups-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.groups-table th {
+    background: #007bff;
+    color: white;
+}
+
+.groups-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.groups-table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Button */
+.view-button {
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.delete {
+    padding: 8px 12px;
+    background: darkred;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.view-button:hover {
+    background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .groups-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .groups-table th,
+    .groups-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .view-button {
+        font-size: 14px;
+    }
+}

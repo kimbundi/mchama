@@ -9,6 +9,7 @@ import groupRouter from "./routes/groupRoute.js";
 import memberRouter from "./routes/memberRoute.js";
 import contributionRouter from "./routes/contributionRoute.js";
 import bankRouter from "./routes/bankRoute.js";
+import allRouter from "./routes/allRoute.js";
 //app config
 
 const app = express()
@@ -51,6 +52,7 @@ app.use("/api/group",groupRouter)
 app.use("/api/member",memberRouter)
 app.use("/api/contribution",contributionRouter)
 app.use("/api/bank",bankRouter)
+app.use("/api/all",allRouter)
 
 app.get("/",(req,res)=>{
     res.send("API working")

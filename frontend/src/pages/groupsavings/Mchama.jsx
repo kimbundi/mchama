@@ -14,10 +14,11 @@ import { storeContext } from '../../context/Storecontext';
 
 import axios  from 'axios';
 import { toast } from 'react-toastify';
+import GroupDetails from '../confirmation/Mchamaconfirmation';
 
 
 const Mchama = () => {
-  const {url} = useContext(storeContext)
+  const {url,token} = useContext(storeContext)
 
   
 
@@ -71,12 +72,17 @@ const [showNameDetails, setShowNameDetails] = useState(false);
     console.log("Form Data Being Sent:", data); // Debugging
   
     try {
-      const response = await axios.post(`${url}/api/group/add`, {
-        ...data,
-        
-      }, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        `${url}/api/group/add`,
+        { ...data },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include the token
+          },
+        }
+      );
+      
   
       console.log("Response from Backend:", response.data);
   
@@ -309,7 +315,7 @@ const [showNameDetails, setShowNameDetails] = useState(false);
       (
 
        
-        <Groupname/>
+        <GroupDetails/>
 
         
       )}

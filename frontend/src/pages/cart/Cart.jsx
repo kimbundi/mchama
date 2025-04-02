@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { storeContext } from '../../context/Storecontext';
 
+
 const Cart = () => {
   const { url, token } = useContext(storeContext);
   const navigate = useNavigate(); // Hook for navigation
@@ -12,8 +13,8 @@ const Cart = () => {
   // Redirect if user is not authenticated
   useEffect(() => {
     if (!token) {
-      toast.error("Tafadhali ingia kwanza!"); // Show a warning message
-      navigate('/login'); // Redirect to login page
+      toast.error("Tafadhali login  kwanza!"); // Show a warning message
+      navigate('/'); // Redirect to login page
     } 
   }, [token, navigate])
   ;

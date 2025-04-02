@@ -1,65 +1,76 @@
 import Contribution from "../models/contributionModel.js";
+import mongoose from "mongoose";
 
-
-// Add a Contribution
-
+// ✅ Add a Contribution
 const addContribution = async (req, res) => {
-    console.log("Received Contribution Data in Backend:", req.body);
+    console.log("📌 Received Contribution Data:", JSON.stringify(req.body, null, 2));
+
     try {
-        let { contributionName, amount, startDate, frequency, invoiceMembers, groupId } = req.body;
+        let { contributionName, memberContribution, startDate, frequency, invoiceMembers, groupId } = req.body;
+        const userId = req.user?._id; // Extract userId from authentication
 
-        if (!groupId) {
-            return res.status(400).json({ success: false, message: "Group ID is required" });
+        // 🔍 Validate inputs
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+        if (!groupId || !mongoose.Types.ObjectId.isValid(groupId)) {
+            return res.status(400).json({ success: false, message: "Invalid or missing Group ID" });
         }
-
-        // Convert groupId to ObjectId
-        const objectGroupId = new mongoose.Types.ObjectId(groupId);
 
         const contribution = new Contribution({
             contributionName,
-            amount,
+            memberContribution,
             startDate,
             frequency,
             invoiceMembers,
-            groupId: objectGroupId // Store as ObjectId
+            group: new mongoose.Types.ObjectId(groupId), // ✅ Convert to ObjectId
+            userId,
         });
 
         await contribution.save();
-        res.status(201).json({ success: true, message: "Contribution added successfully!", contribution });
+        console.log("✅ Contribution added successfully:", contribution);
+        res.status(201).json({ success: true, message: "Contribution added successfully!", data: contribution });
+
     } catch (error) {
-        console.error("Error adding contribution:", error);
-        res.status(500).json({ success: false, message: "Database error", error: error.message });
-    }
-};
-// Get All Contributions
-const listContributions = async (req, res) => {
-    try {
-        const contributions = await Contribution.find({}).populate("groupId");
-        res.json({ success: true, data: contributions });
-    } catch (error) {
-        console.error("Error fetching contributions:", error);
-        res.status(500).json({ success: false, message: "Database error", error: error.message });
+        console.error("❌ Error adding contribution:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
 
-// Remove a Contribution
+// ✅ Get All Contributions (Only for Authenticated User)
+const listContributions = async (req, res) => {
+    try {
+        const userId = req.user?._id;
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+
+        const contributions = await Contribution.find({ userId }).populate("groupId", "name");
+        res.json({ success: true, data: contributions });
+
+    } catch (error) {
+        console.error("❌ Error fetching contributions:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
+    }
+};
+
+// ✅ Remove a Contribution
 const removeContribution = async (req, res) => {
     try {
         const { id } = req.body;
-        if (!id) {
-            return res.status(400).json({ success: false, message: "Contribution ID is required" });
+        const userId = req.user?._id;
+
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+        if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: "Invalid or missing Contribution ID" });
         }
 
-        const contribution = await Contribution.findById(id);
+        const contribution = await Contribution.findOneAndDelete({ _id: id, userId });
         if (!contribution) {
-            return res.status(404).json({ success: false, message: "Contribution not found" });
+            return res.status(404).json({ success: false, message: "Contribution not found or unauthorized" });
         }
 
-        await Contribution.findByIdAndDelete(id);
         res.json({ success: true, message: "Contribution removed successfully" });
+
     } catch (error) {
-        console.error("Error removing contribution:", error);
-        res.status(500).json({ success: false, message: "Database error", error: error.message });
+        console.error("❌ Error removing contribution:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
 

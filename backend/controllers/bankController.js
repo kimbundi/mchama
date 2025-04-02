@@ -1,48 +1,74 @@
 import Bank from "../models/bankModel.js";
 
-// Add a new bank
+import mongoose from "mongoose";
+
+// ✅ Add a New Bank
 const addBank = async (req, res) => {
+    console.log("Received group data in Backend:", req.body);
     try {
+        const userId = req.user?._id; // Extract userId from authentication
+        let { provider,moneyAccountName, moneyAccountNumber, initialBalance, groupId } = req.body;
+
+        // 🔍 Validate inputs
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+        if (!groupId || !mongoose.Types.ObjectId.isValid(groupId)) {
+            return res.status(400).json({ success: false, message: "Invalid or missing Group ID" });
+        }
+
         const bank = new Bank({
-            provider: req.body.provider,
-            accountName: req.body.accountName,
-            accountNumber: req.body.accountNumber,
-            initialBalance: req.body.initialBalance,
-            groupId: req.body.groupId
+            provider,
+            moneyAccountName,
+            moneyAccountNumber,
+            initialBalance,
+            group: new mongoose.Types.ObjectId(groupId), // ✅ Convert to ObjectId
+            userId,
         });
 
         await bank.save();
-        res.status(201).json({ success: true, message: "Bank added successfully!", bank });
+        res.status(201).json({ success: true, message: "Bank added successfully!", data: bank });
+
     } catch (error) {
-        console.error("Error adding bank:", error);
-        res.status(500).json({ success: false, message: "Database error", error: error.message });
+        console.error("❌ Error adding bank:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
 
-// List all banks
+// ✅ List All Banks (Only for Authenticated User)
 const listBanks = async (req, res) => {
     try {
-        const banks = await Bank.find({});
+        const userId = req.user?._id;
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+
+        const banks = await Bank.find({ userId }).populate("groupId", "name");
         res.json({ success: true, data: banks });
+
     } catch (error) {
-        console.error("Error fetching banks:", error);
-        res.status(500).json({ success: false, message: "Error retrieving banks" });
+        console.error("❌ Error fetching banks:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
 
-// Remove a bank
+// ✅ Remove a Bank
 const removeBank = async (req, res) => {
     try {
-        const bank = await Bank.findById(req.body.id);
-        if (!bank) {
-            return res.status(404).json({ success: false, message: "Bank not found" });
+        const { id } = req.body;
+        const userId = req.user?._id;
+
+        if (!userId) return res.status(401).json({ success: false, message: "Unauthorized: User ID is required" });
+        if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: "Invalid or missing Bank ID" });
         }
 
-        await Bank.findByIdAndDelete(req.body.id);
+        const bank = await Bank.findOneAndDelete({ _id: id, userId });
+        if (!bank) {
+            return res.status(404).json({ success: false, message: "Bank not found or unauthorized" });
+        }
+
         res.json({ success: true, message: "Bank removed successfully" });
+
     } catch (error) {
-        console.error("Error removing bank:", error);
-        res.status(500).json({ success: false, message: "Error removing bank" });
+        console.error("❌ Error removing bank:", error);
+        res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
 

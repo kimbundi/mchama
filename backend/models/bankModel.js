@@ -1,13 +1,12 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const bankSchema = new mongoose.Schema({
-    provider: String,
-    accountName: String,
-    accountNumber: String,
-    initialBalance: Number,
-    groupId: { type: mongoose.Schema.Types.ObjectId, ref: 'group' } // Link to Group
+    provider: { type: String, required: true, trim: true }, // Ensure provider name is required
+    moneyAccountName: { type: String, required: true, trim: true }, // Ensure account name is required
+    moneyAccountNumber: { type: String, required: true, unique: true }, // Ensure unique account number
+    initialBalance: { type: Number, default: 0, min: 0 }, // Default to 0, no negative balances
+    group: { type: mongoose.Schema.Types.ObjectId, ref: "Group", required: true }, // Link to Group
+}, { timestamps: true });
 
-})
-
-const bank = mongoose.models.bank|| mongoose.model("bank",bankSchema)
-export default bank
+const Bank = mongoose.models.Bank || mongoose.model("Bank", bankSchema);
+export default Bank;

@@ -1,20 +1,25 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const groupSchema = new mongoose.Schema({
-    groupName: String,
-    memberCount: Number,
-    groupType: String,
-    organizationRole: String,
-    operationCounty: String,
-    isRegistered: String,
-    registrationNumber: String,
-    members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'member' }], // Reference Members
-    contributions: { type: mongoose.Schema.Types.ObjectId, ref: 'Contribution' }, // Reference Contributions
-    bankAccount: { type: mongoose.Schema.Types.ObjectId, ref: 'BankAccount' } // Reference Bank Account
+    groupName: { type: String, required: true }, 
+    memberCount: { type: Number, default: 0 }, 
+    groupType: { type: String, required: true }, 
+    organizationRole: { type: String }, 
+    operationCounty: { type: String, required: true }, 
+    isRegistered: { type: Boolean, default: false },  
+    registrationNumber: { type: String, default: null }, 
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    status: {
+        type: String,
+        enum: ["Pending", "Approved", "Rejected"],  // Allowed values
+        default: "Pending"  // Default status
+    },
 
+    members: [{ type: mongoose.Schema.Types.ObjectId, ref: "Member" }], // Reference Members
+    contributions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Contribution" }], // Multiple Contributions
+    bankAccount: { type: mongoose.Schema.Types.ObjectId, ref: "BankAccount", default: null }, // Optional Bank Account
+}, { timestamps: true }); // Adds createdAt & updatedAt fields
 
-})
+const Group = mongoose.models.Group || mongoose.model("Group", groupSchema);
 
-const group = mongoose.models.group || mongoose.model("group",groupSchema)
-
-export default group;
+export default Group;

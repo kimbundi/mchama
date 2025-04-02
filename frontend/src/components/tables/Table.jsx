@@ -6,21 +6,26 @@ import './Table.css';
 import { storeContext } from '../../context/Storecontext';
 
 const Table = () => {
- 
-  
-  const { url, list } = useContext(storeContext);
-  const [rows, setRows] = useState([{ name: '', phone: '', groupId: '', role: '' }]);
+  const { url, list, token } = useContext(storeContext);
 
+  // Ensure the first group ID is assigned when available
+  const [rows, setRows] = useState([
+    { name: '', phone: '', groupId: list.length > 0 ? list[0] : '', role: '' }
+  ]);
+
+  // Updates row data when user types/selects an option
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
 
+  // Add a new row with default groupId if available
   const handleAddRow = () => {
     setRows([...rows, { name: '', phone: '', groupId: list.length > 0 ? list[0] : '', role: '' }]);
   };
 
+  // Delete row but ensure at least one row remains
   const handleDeleteRow = (index) => {
     if (rows.length === 1) {
       alert('At least one row must be present.');
@@ -28,46 +33,51 @@ const Table = () => {
     }
     setRows(rows.filter((_, i) => i !== index));
   };
+
+  // Save changes by sending rows data to backend
   const handleSaveChanges = async (event) => {
     event.preventDefault();
     console.log("🚀 Form Data Being Sent to Backend:", rows); // Debugging
   
+    // Ensure all fields are filled before submission
     const hasEmptyFields = rows.some(row => 
       !row.name.trim() || !row.phone.trim() || !row.role.trim() || !row.groupId.trim()
     );
   
     if (hasEmptyFields) {
-      alert('Please fill out all fields before saving.');
+      toast.error('⚠️ Please fill out all fields before saving.');
       return;
     }
   
     try {
-      // Wrap the rows array in an object with a "rows" key
       const payload = { rows };
-  console.log(payload)
+      console.log("📦 Payload:", payload);
+
       const response = await axios.post(`${url}/api/member/add`, payload, {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       });
-  
+
       console.log("✅ Response from Backend:", response.data);
   
       if (response.data.success) {
+        toast.success("✅ Member has been added successfully!");
         setRows([{ name: '', phone: '', groupId: list.length > 0 ? list[0] : '', role: '' }]);
-        toast.success("Member has been added successfully");
       } else {
-        toast.error("Member not added.");
+        toast.error("❌ Member not added.");
       }
     } catch (error) {
       console.error("❌ Fetch Error:", error.response?.data || error.message);
-      toast.error("Kuna tatizo. Tafadhali jaribu tena.");
+      toast.error("⚠️ Kuna tatizo. Tafadhali jaribu tena.");
     }
   
-    localStorage.setItem('tableData', JSON.stringify(rows)); 
+    localStorage.setItem('tableData', JSON.stringify(rows));
     alert('Changes saved successfully!');
   };
+
+  // Ensure groupId is assigned correctly when list updates
   useEffect(() => {
     if (list.length > 0) {
-      setRows([{ name: '', phone: '', groupId: list[0], role: '' }]); // Set default groupId
+      setRows([{ name: '', phone: '', groupId: list[0], role: '' }]);
     }
   }, [list]);
 
@@ -109,20 +119,20 @@ const Table = () => {
                 />
               </td>
               <td>
-              <select
-  value={row.groupId}
-  onChange={(e) => handleInputChange(index, 'groupId', e.target.value)} // ✅ Fix key name
->
-  {list.length === 0 ? (
-    <option value="">Hakuna group zilizopatikana</option>
-  ) : (
-    list.map((id) => (
-      <option key={id} value={id}>
-        {id} {/* If you have group names, use: {groupName} */}
-      </option>
-    ))
-  )}
-</select>
+                <select
+                  value={row.groupId}
+                  onChange={(e) => handleInputChange(index, 'groupId', e.target.value)}
+                >
+                  {list.length === 0 ? (
+                    <option value="">Hakuna group zilizopatikana</option>
+                  ) : (
+                    list.map((id) => (
+                      <option key={id} value={id}>
+                        {id} {/* If you have group names, replace {id} with {groupName} */}
+                      </option>
+                    ))
+                  )}
+                </select>
               </td>
               <td>
                 <select

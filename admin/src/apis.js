@@ -36,6 +36,20 @@ export const getAllLoans = async () => {
     throw new Error(error.response?.data?.message || "Failed to fetch loans");
   }
 };
+export const getAll = async () => {
+  
+  try {
+    const response = await api.get("/group/list");
+    console.log("API Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching group:", error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || "Failed to fetch group");
+  }
+};
+
+
+
 
 // Remove loan
 export const removeLoan = async (loanId) => {
@@ -60,3 +74,13 @@ export const updateLoanStatus = async (loanId, status, approvedLoanAmount, userI
         throw new Error(error.response?.data?.message || "Failed to update loan status");
     }
 };
+export const deleteGroup = async (groupId) => {
+  try {
+    const response = await api.delete(`/group/${groupId}/delete`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to delete group");
+  }
+};
+
+
