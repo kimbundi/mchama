@@ -3,7 +3,8 @@ import "./Groupstatus.css"; // Ensure you have styles for better UI
 import { getAll } from "../../apis";
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:4000";
+const API_URL = "https://mchama-backend.onrender.com";
+
 
 const GroupStatus = () => {
     const [groups, setGroups] = useState([]);
