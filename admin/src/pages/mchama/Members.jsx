@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import "./Member.css"; // Import CSS file for styling
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:4000"; // Ensure HTTP is used
+const API_URL = "https://mchama-backend.onrender.com";
+ // Ensure HTTP is used
 
 const GroupDetails = () => {
     const { groupId } = useParams();
