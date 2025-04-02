@@ -8,7 +8,8 @@ export const storeContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   // use it when live const url = "https://mchama-backend.onrender.com";  // Base URL
-  const url = "http://localhost:4000";
+  const url = "https://mchama-backend.onrender.com";  // Base URL
+
   const navigate = useNavigate();
 
   const [token, setToken] = useState("");
